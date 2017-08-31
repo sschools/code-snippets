@@ -1,6 +1,6 @@
 const express = require("express");
 const mustacheExpress = require("mustache-express");
-const {checkPasswordConfirm} = require("./dal");
+const {checkPasswordConfirm, addUser} = require("./dal");
 const { MONGO_URI, TOKEN_SECRET } = require('./config');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
@@ -41,6 +41,7 @@ app.post("/snippets/signup", function (req, res) {
      return res.render("signup", {message});
    } else {
      let message = "Success"
+     addUser(req.body);
      return res.render("signup", {message});
    }
 });
