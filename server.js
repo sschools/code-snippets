@@ -14,3 +14,19 @@ app.set("views", __dirname + "/views");
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/", function (req, res) {
+  res.redirect("/snippets/home");
+});
+
+app.get("/snippets/home", function (req, res) {
+  res.render("home");
+});
+
+app.get("/snippets/signup", function (req, res) {
+  res.render("signup");
+});
+
+app.listen(3000, function () {
+  console.log("Code Snippet App is running on: 3000");
+});
