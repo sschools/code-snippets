@@ -10,14 +10,18 @@
       <h2>Code Snippet Organizer Registration Page</h2>
     </header>
     <main>
-      <form>
+      <form action="/snippets/signup" method="POST">
         <h4>Register For Your Account:</h4>
         <input type="text" name="name" placeholder="Name"><br>
         <input type="text" name="username" placeholder="User Name"><br>
         <input type="password" name="password" placeholder="Password"><br>
-        <input type="password" name="password-con" placeholder="Confirm Password"><br>
-        <button type="submit" action="/signup" method="POST">Register</button>
+        <input type="password" name="passwordCon" placeholder="Confirm Password"><br>
+        <button type="submit">Register</button>
       </form>
+      <br>
+      {{#message}}
+      <h2>{{message}}</h2>
+      {{/message}}
     </main>
   </body>
 </html>

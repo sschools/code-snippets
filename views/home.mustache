@@ -8,14 +8,14 @@
   <body>
     <header>
       <h2>Welcome To The Magniful Code Snippet Organizer</h2>
-      <h3>Please Log In Below or <a href="/signup">Click Here To Sign Up</a></h3>
+      <h3>Please Log In Below or <a href="/snippets/signup">Click Here To Sign Up</a></h3>
     </header>
     <main>
-      <form>
+      <form action="/home" method="POST">
         <h4>Register:</h4>
         <input type="text" name="username" placeholder="User Name"><br>
         <input type="password" name="password" placeholder="Password"><br>
-        <button type="submit" action="/home" method="POST">Log Me In</button>
+        <button type="submit">Log Me In</button>
       </form>
     </main>
   </body>
