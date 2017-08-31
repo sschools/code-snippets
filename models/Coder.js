@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
   password: {type: String, select: false}
 });
 
-RobotSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
   const user = this
   if (!user.isModified('password')) {
     next()
@@ -23,7 +23,7 @@ RobotSchema.pre('save', function (next) {
   })
 });
 
-RobotSchema.methods.comparePassword = function (pwd, dbPass, done) {
+UserSchema.methods.comparePassword = function (pwd, dbPass, done) {
   // pwd = plain text
   bcrypt.compare(pwd, dbPass, (err, isMatch) => {
     done(err, isMatch)

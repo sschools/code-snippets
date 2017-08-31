@@ -27,6 +27,10 @@ app.get("/snippets/signup", function (req, res) {
   res.render("signup");
 });
 
+app.get("/snippets/addSnippet", function (req, res) {
+  res.render("addSnippet");
+});
+
 app.listen(3000, function () {
   console.log("Code Snippet App is running on: 3000");
 });

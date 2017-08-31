@@ -10,6 +10,6 @@ const SnippetSchema = new mongoose.Schema({
   notes: { type: String }
 });
 
-const Snippet = mongoose.model('Snippet', snippetsSchema);
+const Snippet = mongoose.model('Snippet', SnippetSchema);
 
 module.exports = Snippet;
