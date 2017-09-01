@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Snippet = require('./models/Snippet');
 const Coder = require("./models/Coder");
+const bcrypt = require('bcrypt');
 
 const jwt = require('jsonwebtoken')
 const { TOKEN_SECRET } = require('./config')
@@ -39,22 +40,18 @@ function createToken({ _id, name, username }) {
 }
 
 function verifyUser(user) {
-  Coder.findOne({ username: user.username }, '+password', function (err, coder, next) {
-    if (err) return next(err)
-    if (!coder) {
-      return res.status(401).send({ message: 'Wrong email and/or password' })
-    }
-    coder.comparePassword(user.password, coder.password, function (err, isMatch) {
-      if (!isMatch) {
-        return res.status(401).send({ message: 'Wrong email and/or password' })
-      } else {
-        createToken(coder)
-      }
-    })
-    console.log("from dal", coder);
-    return coder;
-  })
-
+  let isMatch = false;
+  let current;
+  Coder.find({ username: user.username }, '+password', function (err, coder) {
+    console.log(coder);
+    bcrypt.compare(user.password, coder.password, (err, res) => {
+      isMatch = res;
+    });
+  });
+  if (isMatch) {
+    current= coder;
+  }
+  return current;
 }
 
 

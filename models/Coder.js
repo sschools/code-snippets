@@ -21,10 +21,9 @@ CoderSchema.pre('save', function (next) {
       next()
     })
   })
-});
+})
 
 CoderSchema.methods.comparePassword = function (pwd, dbPass, done) {
-  // pwd = plain text
   bcrypt.compare(pwd, dbPass, (err, isMatch) => {
     done(err, isMatch)
   })
