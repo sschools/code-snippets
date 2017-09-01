@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Menu</title>
+  </head>
+  <body>
+    <header>
+      <h2>Welcome {{name}}. You are succusfully logged in.</h2>
+      <h3>What would you like to do?</h3>
+    </header>
+    <main>
+      <form action="/menu" method="POST">
+        <button type="submit" name="mine" value="{{username}}">See All of My Snippets</button><br>
+        <button type="submit" name="all" value="{{username}}">See All Snippets</button><br>
+        <input type="text" name="language" placeholder="Enter Language Here">
+        <button type="submit" name="langButton" value="true">Search Snippets by Language</button><br>
+        <input type="text" name="tag" placeholder="Enter Tag Here">
+        <button type="submit" name="tagButton" value="true">Search Snippets by Tag</button>
+      </form>
+    </main>
+  </body>
+</html>

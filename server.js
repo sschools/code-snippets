@@ -1,6 +1,6 @@
 const express = require("express");
 const mustacheExpress = require("mustache-express");
-const {checkPasswordConfirm, addUser} = require("./dal");
+const {checkPasswordConfirm, addUser, verifyUser} = require("./dal");
 const { MONGO_URI, TOKEN_SECRET } = require('./config');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
@@ -35,15 +35,20 @@ app.get("/snippets/addSnippet", function (req, res) {
 });
 
 app.post("/snippets/signup", function (req, res) {
-  console.log(req.body);
    if (!checkPasswordConfirm(req.body.password, req.body.passwordCon)) {
      let message = "Passwords Do Not Match";
      return res.render("signup", {message});
    } else {
      let message = "Success"
-     addUser(req.body);
-     return res.render("signup", {message});
+     currentUser = addUser(req.body);
+     return res.render("menu", {currentUser});
    }
+});
+
+app.post("/snippets/home", function (req, res) {
+  currentUser = verifyUser(req.body);
+  console.log(currentUser);
+  res.render("menu", currentUser);
 });
 
 app.listen(3000, function () {
