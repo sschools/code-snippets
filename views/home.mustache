@@ -11,8 +11,11 @@
       <h3>Please Log In Below or <a href="/snippets/signup">Click Here To Sign Up</a></h3>
     </header>
     <main>
+      {{#message}}
+      <h3>{{message}}</h3>
+      {{/message}}
       <form action="/snippets/home" method="POST">
-        <h4>Register:</h4>
+        <h4>Log In:</h4>
         <input type="text" name="username" placeholder="User Name"><br>
         <input type="password" name="password" placeholder="Password"><br>
         <button type="submit">Log Me In</button>

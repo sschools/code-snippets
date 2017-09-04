@@ -50,12 +50,10 @@ app.post("/snippets/home", function (req, res) {
   let current;
   verifyUser(req.body).then(function(coder) {
     current = coder[0];
-    console.log("Req body password: ", req.body.password);
-    console.log("Current password: ", current.password);
-    return res.render("menu", current);
-    bcrypt.compare(req.body.password, current.password).then(function(err, results) {
-      if (err) {
-
+    bcrypt.compare(req.body.password, current.password, function(err, results) {
+      if (!results) {
+        let message = "Incorrect password or username.";
+        return res.render("home", {message});
       }
       if (results) {
         return res.render("menu", current)

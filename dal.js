@@ -38,26 +38,9 @@ function createToken({ _id, name, username }) {
   }
   return jwt.sign(payload, TOKEN_SECRET)
 }
-let foundUser = {};
+
 function verifyUser(user) {
   return Coder.find({ username: user.username }, '+password');
-
-  /*
-  let isMatch = false;
-  let current;
-  Coder.find({ username: user.username }, '+password', function (err, coder) {
-    current = coder[0];
-    bcrypt.compare(user.password, current.password).then(function(res) {
-      console.log("Res: ", res);
-      foundUser = current;
-
-    })
-    console.log("Found User: ", foundUser);
-  });
-
-  return current;
-  */
-
 }
 
 module.exports = {
