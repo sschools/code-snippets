@@ -40,9 +40,11 @@ app.post("/snippets/signup", function (req, res) {
      let message = "Passwords Do Not Match";
      return res.render("signup", {message});
    } else {
-     let message = "Success"
-     currentUser = addUser(req.body);
-     return res.render("menu", {currentUser});
+     let message = "Success";
+     addUser(req.body).then(function(user) {
+       return res.render("menu", user);
+     })
+
    }
 });
 

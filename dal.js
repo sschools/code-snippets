@@ -21,11 +21,8 @@ function addUser(user) {
     username: user.username,
     password: user.password
   });
-
-  coder.save();
   createToken(coder);
-  console.log(coder);
-  return coder;
+  return coder.save();
 }
 
 function createToken({ _id, name, username }) {
