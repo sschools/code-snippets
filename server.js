@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const Snippet = require('./models/Snippet');
 const Coder = require("./models/Coder");
+const bcrypt = require('bcrypt');
 const app = express();
 
 app.engine("mustache", mustacheExpress());
@@ -46,9 +47,22 @@ app.post("/snippets/signup", function (req, res) {
 });
 
 app.post("/snippets/home", function (req, res) {
-  currentUser = verifyUser(req.body);
-  console.log(currentUser);
-  res.render("menu", currentUser);
+  let current;
+  verifyUser(req.body).then(function(coder) {
+    current = coder[0];
+    console.log("Req body password: ", req.body.password);
+    console.log("Current password: ", current.password);
+    return res.render("menu", current);
+    bcrypt.compare(req.body.password, current.password).then(function(err, results) {
+      if (err) {
+
+      }
+      if (results) {
+        return res.render("menu", current)
+      }
+    })
+
+  });
 });
 
 app.listen(3000, function () {
