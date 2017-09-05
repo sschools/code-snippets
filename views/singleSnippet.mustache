@@ -15,6 +15,10 @@
       <p>Title: {{snippet.title}}</p>
       <p>Language: {{snippet.language}}</p>
       <p>Code: {{snippet.code}}</p>
+      <br>
+      <form action="/snippets/return" method="POST">
+        <button type="submit" name="menu" value="{{snippet.username}}">Return To Menu</button>
+      </form>
     </main>
   </body>
 </html>

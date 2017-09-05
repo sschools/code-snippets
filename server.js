@@ -105,8 +105,14 @@ app.post("/snippets/multiSnippets", function(req, res) {
   getSnippetById(req.body.viewSnip).then(function(snippet) {
     let snip = snippet[0];
     res.render("singleSnippet", {snippet: snip, message: "Detail on " + snip.title + "."});
-  })
+  });
+});
 
+app.post("/snippets/return", function(req, res) {
+  getUserByName(req.body.menu).then(function(user) {
+    let current = user[0];
+    res.render("menu", current);
+  });
 });
 
 app.listen(3000, function () {
