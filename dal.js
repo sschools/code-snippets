@@ -72,6 +72,10 @@ function getSnippetsByTag(tag) {
   return Snippet.find({tags: tag});
 }
 
+function getSnippetById(id) {
+  return Snippet.find({_id: id});
+}
+
 module.exports = {
   checkPasswordConfirm,
   addUser,
@@ -82,5 +86,6 @@ module.exports = {
   getSnippetsByTag,
   addSnippet,
   getAllSnippets,
-  getSnippetsByUser
+  getSnippetsByUser,
+  getSnippetById
 }

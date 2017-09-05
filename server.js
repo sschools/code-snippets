@@ -1,6 +1,6 @@
 const express = require("express");
 const mustacheExpress = require("mustache-express");
-const {checkPasswordConfirm, addUser, verifyUser, getUserByName, getSnippetsByLang, getSnippetsByTag, addSnippet, getAllSnippets, getSnippetsByUser} = require("./dal");
+const {checkPasswordConfirm, addUser, verifyUser, getUserByName, getSnippetsByLang, getSnippetsByTag, addSnippet, getAllSnippets, getSnippetsByUser, getSnippetById} = require("./dal");
 const { MONGO_URI, TOKEN_SECRET } = require('./config');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
@@ -97,9 +97,15 @@ app.post("/snippets/menu", function (req, res) {
 app.post("/snippets/addSnippet", function(req, res) {
   let snippet = req.body;
   addSnippet(snippet).then(function(newSnip) {
-    console.log(newSnip);
-    res.render("singleSnippet", newSnip);
+    res.render("singleSnippet", {snippet: newSnip, message: "Your Snippet Was Successfully Added."});
   });
+});
+
+app.post("/snippets/multiSnippets", function(req, res) {
+  getSnippetById(req.body.viewSnip).then(function(snippet) {
+    let snip = snippet[0];
+    res.render("singleSnippet", {snippet: snip, message: "Detail on " + snip.title + "."});
+  })
 
 });
 

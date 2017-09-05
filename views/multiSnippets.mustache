@@ -12,9 +12,12 @@
     <main>
       {{#snippets}}
       <div>
-      <p>Title: {{title}}</p>
-      <p>Language: {{language}}</p>
-      <p>Code: {{code}}</p>
+        <p>Title: {{title}}</p>
+        <p>Language: {{language}}</p>
+        <form action="/snippets/multiSnippets" method="POST">
+          <button name="viewSnip" type="submit" value="{{_id}}">See Snippet Detail</button>
+        </form>
+      </div>
       {{/snippets}}
     </main>
   </body>

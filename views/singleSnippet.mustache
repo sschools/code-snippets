@@ -7,12 +7,14 @@
   </head>
   <body>
     <header>
-      <h2>Your Snippet Was Successfully Added</h2>
+      {{#message}}
+      <h2>{{message}}</h2>
+      {{/message}}
     </header>
     <main>
-      <p>Title: {{title}}</p>
-      <p>Language: {{language}}</p>
-      <p>Code: {{code}}</p>
+      <p>Title: {{snippet.title}}</p>
+      <p>Language: {{snippet.language}}</p>
+      <p>Code: {{snippet.code}}</p>
     </main>
   </body>
 </html>
