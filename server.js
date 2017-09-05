@@ -72,9 +72,16 @@ app.post("/snippets/menu", function (req, res) {
       let current = coder[0];
       return res.render("addSnippet", current);
     });
+  } else if (req.body.mine) {
+
+  } else if (req.body.all) {
+
   } else if (req.body.language) {
     let chosenLangauge = req.body.language;
-    getSnippetsByLang(chosenLangauge);
+    getSnippetsByLang(chosenLangauge).then(function(snippets) {
+      console.log(snippets);
+      return res.render("multSnippets", {snippets});
+    });
   } else {
     let chosenTag = req.body.tag;
     getSnippetsByTag(chosenTag);
@@ -82,12 +89,12 @@ app.post("/snippets/menu", function (req, res) {
 });
 
 app.post("/snippets/addSnippet", function(req, res) {
-  console.log(req.body);
   let snippet = req.body;
   addSnippet(snippet).then(function(newSnip) {
     console.log(newSnip);
+    res.render("singleSnippet", newSnip);
   });
-  res.render("home");
+
 });
 
 app.listen(3000, function () {

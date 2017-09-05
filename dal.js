@@ -57,7 +57,7 @@ function addSnippet(snip) {
 }
 
 function getSnippetsByLang(lang) {
-
+  return Snippet.find({language: lang});
 }
 
 function getSnippetsByTag(tag) {
