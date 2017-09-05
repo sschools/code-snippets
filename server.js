@@ -1,6 +1,6 @@
 const express = require("express");
 const mustacheExpress = require("mustache-express");
-const {checkPasswordConfirm, addUser, verifyUser, getUserByName, getSnippetsByLang, getSnippetsByTag, addSnippet} = require("./dal");
+const {checkPasswordConfirm, addUser, verifyUser, getUserByName, getSnippetsByLang, getSnippetsByTag, addSnippet, getAllSnippets, getSnippetsByUser} = require("./dal");
 const { MONGO_URI, TOKEN_SECRET } = require('./config');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
@@ -73,18 +73,24 @@ app.post("/snippets/menu", function (req, res) {
       return res.render("addSnippet", current);
     });
   } else if (req.body.mine) {
-
+    getSnippetsByUser(req.body.mine).then(function(snippets) {
+      return res.render("multiSnippets", {snippets});
+    })
   } else if (req.body.all) {
-
+    getAllSnippets().then(function(snippets) {
+      return res.render("multiSnippets", {snippets});
+    });
   } else if (req.body.language) {
     let chosenLangauge = req.body.language;
     getSnippetsByLang(chosenLangauge).then(function(snippets) {
       console.log(snippets);
-      return res.render("multSnippets", {snippets});
+      return res.render("multiSnippets", {snippets});
     });
   } else {
     let chosenTag = req.body.tag;
-    getSnippetsByTag(chosenTag);
+    getSnippetsByTag(chosenTag).then(function(snippets) {
+      return res.render("multiSnippets", {snippets});
+    });
   }
 });
 

@@ -7,12 +7,15 @@
   </head>
   <body>
     <header>
-      <h2>Your Snippet Was Successfully Added</h2>
+
     </header>
     <main>
+      {{#snippets}}
+      <div>
       <p>Title: {{title}}</p>
       <p>Language: {{language}}</p>
       <p>Code: {{code}}</p>
+      {{/snippets}}
     </main>
   </body>
 </html>

@@ -56,12 +56,20 @@ function addSnippet(snip) {
   return snippet.save();
 }
 
+function getAllSnippets() {
+  return Snippet.find();
+}
+
+function getSnippetsByUser(name) {
+  return Snippet.find({username: name});
+}
+
 function getSnippetsByLang(lang) {
   return Snippet.find({language: lang});
 }
 
 function getSnippetsByTag(tag) {
-
+  return Snippet.find({tags: tag});
 }
 
 module.exports = {
@@ -72,5 +80,7 @@ module.exports = {
   getUserByName,
   getSnippetsByLang,
   getSnippetsByTag,
-  addSnippet
+  addSnippet,
+  getAllSnippets,
+  getSnippetsByUser
 }
