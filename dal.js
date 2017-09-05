@@ -40,9 +40,24 @@ function verifyUser(user) {
   return Coder.find({ username: user.username }, '+password');
 }
 
+function getUserByName(name) {
+  return Coder.find({ username: name });
+}
+
+function getSnippetsByLang(lang) {
+
+}
+
+function getSnippetsByTag(tag) {
+
+}
+
 module.exports = {
   checkPasswordConfirm,
   addUser,
   createToken,
-  verifyUser
+  verifyUser,
+  getUserByName,
+  getSnippetsByLang,
+  getSnippetsByTag
 }

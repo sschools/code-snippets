@@ -11,7 +11,8 @@
       <h3>What would you like to do?</h3>
     </header>
     <main>
-      <form action="/menu" method="POST">
+      <form action="/snippets/menu" method="POST">
+        <button type="submit" name="addButton" value="{{username}}">Add A Snippet</button><br>
         <button type="submit" name="mine" value="{{username}}">See All of My Snippets</button><br>
         <button type="submit" name="all" value="{{username}}">See All Snippets</button><br>
         <input type="text" name="language" placeholder="Enter Language Here">

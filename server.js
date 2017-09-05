@@ -1,6 +1,6 @@
 const express = require("express");
 const mustacheExpress = require("mustache-express");
-const {checkPasswordConfirm, addUser, verifyUser} = require("./dal");
+const {checkPasswordConfirm, addUser, verifyUser, getUserByName, getSnippetsByLang, getSnippetsByTag} = require("./dal");
 const { MONGO_URI, TOKEN_SECRET } = require('./config');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
@@ -61,8 +61,24 @@ app.post("/snippets/home", function (req, res) {
         return res.render("menu", current)
       }
     })
-
   });
+});
+
+app.post("/snippets/menu", function (req, res) {
+  console.log(req.body);
+  if (req.body.addButton) {
+    let currentUserName = req.body.addButton;
+    getUserByName(currentUserName).then(function(coder) {
+      let current = coder[0];
+      return res.render("addSnippet", current);
+    });
+  } else if (req.body.language) {
+    let chosenLangauge = req.body.language;
+    getSnippetsByLang(chosenLangauge);
+  } else {
+    let chosenTag = req.body.tag;
+    getSnippetsByTag(chosenTag);
+  }
 });
 
 app.listen(3000, function () {
