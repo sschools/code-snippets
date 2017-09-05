@@ -51,9 +51,15 @@ function addSnippet(snip) {
     language: snip.language,
     tags: snip.tag,
     code: snip.code,
-    notes: snip.notes
+    notes: snip.notes,
+    star: 0
   });
   return snippet.save();
+}
+
+function addStar(id, stars) {
+  return Snippet.update({"_id": id},
+    {"$set": {"star": stars}});
 }
 
 function getAllSnippets() {
@@ -87,5 +93,6 @@ module.exports = {
   addSnippet,
   getAllSnippets,
   getSnippetsByUser,
-  getSnippetById
+  getSnippetById,
+  addStar
 }

@@ -15,6 +15,13 @@
       <p>Title: {{snippet.title}}</p>
       <p>Language: {{snippet.language}}</p>
       <p>Code: {{snippet.code}}</p>
+      <p>Notes: {{snippet.notes}}</p>
+      <p>Stars: {{snippet.star}}</p>
+      <br>
+      <form action="/snippets/addStar" method="POST">
+        <input type="hidden" name="oneStar" value="{{snippet.star}}">
+        <button type="submit" name="addStar" value="{{snippet._id}}">Add A Star</button>
+      </form>
       <br>
       <form action="/snippets/return" method="POST">
         <button type="submit" name="menu" value="{{snippet.username}}">Return To Menu</button>

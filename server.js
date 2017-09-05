@@ -1,6 +1,6 @@
 const express = require("express");
 const mustacheExpress = require("mustache-express");
-const {checkPasswordConfirm, addUser, verifyUser, getUserByName, getSnippetsByLang, getSnippetsByTag, addSnippet, getAllSnippets, getSnippetsByUser, getSnippetById} = require("./dal");
+const {checkPasswordConfirm, addUser, verifyUser, getUserByName, getSnippetsByLang, getSnippetsByTag, addSnippet, getAllSnippets, getSnippetsByUser, getSnippetById, addStar} = require("./dal");
 const { MONGO_URI, TOKEN_SECRET } = require('./config');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
@@ -33,6 +33,11 @@ app.get("/snippets/signup", function (req, res) {
 
 app.get("/snippets/addSnippet", function (req, res) {
   res.render("addSnippet");
+});
+
+app.get("/snippets/singleSnippet/:_id", function(req, res) {
+  console.log(req.params._id);
+  res.render("singleSnippet");
 });
 
 app.post("/snippets/signup", function (req, res) {
@@ -83,7 +88,6 @@ app.post("/snippets/menu", function (req, res) {
   } else if (req.body.language) {
     let chosenLangauge = req.body.language;
     getSnippetsByLang(chosenLangauge).then(function(snippets) {
-      console.log(snippets);
       return res.render("multiSnippets", {snippets});
     });
   } else {
@@ -112,6 +116,22 @@ app.post("/snippets/return", function(req, res) {
   getUserByName(req.body.menu).then(function(user) {
     let current = user[0];
     res.render("menu", current);
+  });
+});
+
+app.post("/snippets/addStar", function(req, res) {
+  getSnippetById(req.body.addStar).then(function(snippet) {
+    let stars = 0;
+    if (!req.body.oneStar) {
+      stars = 1;
+    } else {
+      stars = parseInt(req.body.oneStar) + 1;
+    }
+    let snip = snippet[0];
+    addStar(snip._id, stars).then(function() {
+      console.log(snip.id);
+      res.redirect(`/snippets/singleSnippet/${snip.id}`);
+    });
   });
 });
 
