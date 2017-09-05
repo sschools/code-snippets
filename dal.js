@@ -44,6 +44,18 @@ function getUserByName(name) {
   return Coder.find({ username: name });
 }
 
+function addSnippet(snip) {
+  const snippet = new Snippet({
+    username: snip.addSnipButton,
+    title: snip.title,
+    language: snip.language,
+    tags: snip.tag,
+    code: snip.code,
+    notes: snip.notes
+  });
+  return snippet.save();
+}
+
 function getSnippetsByLang(lang) {
 
 }
@@ -59,5 +71,6 @@ module.exports = {
   verifyUser,
   getUserByName,
   getSnippetsByLang,
-  getSnippetsByTag
+  getSnippetsByTag,
+  addSnippet
 }
