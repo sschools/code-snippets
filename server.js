@@ -35,11 +35,6 @@ app.get("/snippets/addSnippet", function (req, res) {
   res.render("addSnippet");
 });
 
-app.get("/snippets/singleSnippet/:_id", function(req, res) {
-  console.log(req.params._id);
-  res.render("singleSnippet");
-});
-
 app.post("/snippets/signup", function (req, res) {
    if (!checkPasswordConfirm(req.body.password, req.body.passwordCon)) {
      let message = "Passwords Do Not Match";
@@ -70,7 +65,6 @@ app.post("/snippets/home", function (req, res) {
 });
 
 app.post("/snippets/menu", function (req, res) {
-  console.log(req.body);
   if (req.body.addButton) {
     let currentUserName = req.body.addButton;
     getUserByName(currentUserName).then(function(coder) {
@@ -129,8 +123,9 @@ app.post("/snippets/addStar", function(req, res) {
     }
     let snip = snippet[0];
     addStar(snip._id, stars).then(function() {
-      console.log(snip.id);
-      res.redirect(`/snippets/singleSnippet/${snip.id}`);
+      getAllSnippets().then(function(snippets) {
+        return res.render("multiSnippets", {snippets});
+      });
     });
   });
 });
