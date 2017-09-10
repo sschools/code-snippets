@@ -1,12 +1,51 @@
+body {
+  background-color: #000037;
+  font-family: sans-serif;
+  color: #b0b0c4;
+}
+
 button {
+  border: 0;
   width: 150px;
   height: 35px;
   margin: 10px;
-  border-radius: 5px
+  border-radius: 5px;
+  background-color: #b0b0c4;
+  color: #000037;
+}
+
+button:hover {
+  background-color: #efd4fc;
+}
+
+a {
+  color: #b0b0c4;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #efd4fc;
 }
 
 input {
   width: 150px;
   height: 30px;
   margin: 10px
+}
+
+.list-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.list-div {
+  width: 150px;
+  height: 200px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.detail-button {
+  margin: 10px 0;
 }

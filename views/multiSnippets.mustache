@@ -9,13 +9,13 @@
     <header>
 
     </header>
-    <main>
+    <main class="list-container">
       {{#snippets}}
-      <div>
+      <div class="list-div">
         <p>Title: {{title}}</p>
         <p>Language: {{language}}</p>
         <form action="/snippets/multiSnippets" method="POST">
-          <button name="viewSnip" type="submit" value="{{_id}}">See Snippet Detail</button>
+          <button class="detail-button" name="viewSnip" type="submit" value="{{_id}}">See Snippet Detail</button>
         </form>
       </div>
       {{/snippets}}
